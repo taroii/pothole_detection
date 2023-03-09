@@ -2,17 +2,18 @@
 import json
 import urllib.request
 from serpapi import GoogleSearch
-import time
+import socket
 
 def serpapi_get_google_images(queries=[], path="", verbose=True, max_images=300):
     '''
     Takes in list of queries and downloads google search images of those queries using SerpAPI. 
     Downloads to user-designated folder. 
     For my personal case, path should be "C:/Users/Polar/Downloads/AI_Camp/images/"
+    max_images is the maximum number of images scraped for each query.
     '''
     image_results = []
     
-    for query in queries:
+    for query_no, query in enumerate(queries, start=1):
         params = {
             "q": query,
             "tbm": "isch",
@@ -27,14 +28,15 @@ def serpapi_get_google_images(queries=[], path="", verbose=True, max_images=300)
 
         images_is_present = True
         while images_is_present:
-            results = search.get_dict()       # JSON -> Python dictionary
-            
-            if len(image_results) >= max_images:     
+            if len(image_results) >= query_no * max_images:  
+                images_is_present = False   
                 break                         # Break after collecting max_images images
+            
+            results = search.get_dict()       # JSON -> Python dictionary
 
             # checks for "Google hasn't returned any results for this query."
             if "error" not in results:
-                for image in results["images_results"]:
+                for index, image in enumerate(results["images_results"]):
                     if image["original"] not in image_results:
                         image_results.append(image["original"])
 
@@ -47,27 +49,22 @@ def serpapi_get_google_images(queries=[], path="", verbose=True, max_images=300)
     
     # -----------------------
     # Downloading images
-    #####results["images_results"] instead of image_results
+
     for index, image in enumerate(image_results, start=1):
         if verbose:
             print(f"Downloading image number {index}...")
         
-        max_retries = 3 #how many times to retry downloading image
-        delay = 2 #initial delay time between reattempts
+        socket.setdefaulttimeout(15) #timeout after 15 seconds
 
-        for _ in range(max_retries):
-            try:
-                opener=urllib.request.build_opener()
-                opener.addheaders=[("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.63")]
-                urllib.request.install_opener(opener)
-                urllib.request.urlretrieve(image, f"{path}/img_{index}.jpg")
-                #image["original"] instead of image
-                break
-            except:
-                if verbose:
-                    print(f"Failed to download image {index}, retrying...")
-                time.sleep(delay)
-                delay *= 2
+        try:
+            opener=urllib.request.build_opener()
+            opener.addheaders=[("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.63")]
+            urllib.request.install_opener(opener)
+            urllib.request.urlretrieve(image, f"{path}/img_{index}.jpg")
+        except:
+            if verbose:
+                print(f"Failed to download. Skipping image {index}.")
+                
     if verbose:
         print(json.dumps(image_results, indent=2))
         print(len(image_results))
