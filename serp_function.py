@@ -39,6 +39,8 @@ def serpapi_get_google_images(queries=[], path="", verbose=True, max_images=300)
                 for index, image in enumerate(results["images_results"]):
                     if image["original"] not in image_results:
                         image_results.append(image["original"])
+                        if len(image_results) == query_no * max_images:
+                            continue
 
                 # update to the next page
                 params["ijn"] += 1
