@@ -1,8 +1,8 @@
 # Pothole Recognition
 ### By Taro Iyadomi
-##### March 7 - 
+##### March 7 - March 29, 2023
 
-This project is part of AI Camp's Summer 2023 Data Science Internship training program. The goal of this project is to build a computer vision application from start to finish, using technologies like SerpAPI, ... , all in Python.  
+This project is part of AI Camp's Summer 2023 Data Science Internship training program. The goal of this project is to build a computer vision application from start to finish, using technologies like SerpAPI, PyTorch, HuggingFace, and Flask.  
 
 Using images of roads with potholes and without potholes, the goal of our model is to detect the existence of potholes in those images. Naturally, these images have varying degrees of pothole-intensity (ie how big the pothole is), so we can enhance this model to classify the potholes into different intensity categories, as well as calculate their likelihoods of causing tire damage for sedans, crossovers, SUVs, etc.  
 
