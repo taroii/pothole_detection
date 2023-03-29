@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="home">
+<h1>AI Pothole Detection</h1>
+<h3>Created by Taro Iyadomi as part of AI Camp's Training Program.</h3>
+<form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data" class="container">
+  <input type="file" name="image" accept="image/*">
+    <button type="submit">Detect Pothole</button>
+</form>
+</div>
+{% endblock %}

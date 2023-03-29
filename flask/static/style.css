@@ -1,0 +1,32 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  font-family: "Arial", sans-serif;
+  color: #ffffff;
+  
+  /* Set the background image */
+  background-image: url('/static/background.png');
+
+  /* Set the size and position of the background image */
+  background-size: cover;
+  background-position: center;
+
+  /* Add a fallback background color for browsers that don't support the blur effect */
+  background-color: rgb(152, 93, 52);
+}
+
+.result {
+  background-color: rgba(143, 143, 143, 0.5);
+  padding: 20px;
+  padding-top: 0.1px;
+  border-radius: 10px;
+}
+
+.home {
+  background-color: rgba(143, 143, 143, 0.5);
+  padding: 20px;
+  padding-top: 0.1px;
+  border-radius: 10px;
+}
