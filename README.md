@@ -3,6 +3,7 @@
 ##### March 7 - March 29, 2023
 
 [:star: Link to Demo :star:](https://replit.com/@taroii/pothole-detection?v=1) 
+[:star: Link to Model on HuggingFace :star:](https://huggingface.co/taroii/pothole-detection-model)
 
 This project is part of AI Camp's Summer 2023 Data Science Internship training program. The goal of this project is to build a computer vision application from start to finish, using technologies like SerpAPI, PyTorch, HuggingFace, and Flask.  
 
