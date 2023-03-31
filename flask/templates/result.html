@@ -21,7 +21,7 @@
   <body>
     <div class="result">
     <h1>{{ prediction }}</h1>
-    <h3>Probability of pothole: {{ prob_pothole }}</h3>
+    <h3>{{ second_message }}</h3>
     <img src="data:image/jpeg;base64,{{ image }}" style="width: 224px; height: 224px;"/>
     <form method="get" action="{{ url_for('home') }}">
       <button type="submit">Try another image</button>
