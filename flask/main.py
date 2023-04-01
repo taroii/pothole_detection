@@ -3,7 +3,7 @@ from io import BytesIO
 import requests, base64
 
 API_URL = "https://api-inference.huggingface.co/models/taroii/pothole-detection-model"
-headers = {"Authorization": "Bearer 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"}
+headers = {"Authorization": "INSERT_CODE_HERE"}
 
 def query(img):
   response = requests.post(API_URL, headers=headers, data=img)
